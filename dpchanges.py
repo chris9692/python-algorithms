@@ -1,9 +1,9 @@
 coins = 1, 5, 10, 25
-states = {}
+states = []
 
 def change(v, states):
     if len(states) < v:
-        states = {s:0 for s in range(1,v+1)}
+        states = [0 for s in range(v+1)]
     if v < 1:
         return 0
     elif states[v] != 0:
