@@ -1,3 +1,16 @@
+def _generate(str, pairs, opens, closes):
+    if closes == 0:
+        print(str)
+        return
+    if opens < closes:
+        _generate(str + ')', pairs, opens, closes - 1)
+    if opens > 0:
+        _generate(str + '(', pairs, opens - 1, closes)
+
+def generate(pairs):
+    _generate('', pairs, pairs, pairs)
+
+    
 class ParenthesisCombinations(object):
     """
     This class provides a mechanism to generate N pairs of
