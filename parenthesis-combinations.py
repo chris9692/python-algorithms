@@ -1,15 +1,14 @@
 def _generate(str, pairs, opens, closes):
-    if closes == 0:
+    if closes == pairs:
         print(str)
         return
-    if opens < closes:
-        _generate(str + ')', pairs, opens, closes - 1)
-    if opens > 0:
-        _generate(str + '(', pairs, opens - 1, closes)
+    if opens > closes:
+        _generate(str + ')', pairs, opens, closes + 1)
+    if opens < pairs:
+        _generate(str + '(', pairs, opens + 1, closes)
 
 def generate(pairs):
-    _generate('', pairs, pairs, pairs)
-
+    _generate('(', pairs, 1, 0)
     
 class ParenthesisCombinations(object):
     """
