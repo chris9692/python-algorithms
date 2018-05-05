@@ -20,7 +20,7 @@ def any_sum(s, *args):
             subsum = any_sum(s-n, *args[:-1])
             combinations.extend([(*x,n) for x in subsum if n not in x])
             
-    return set(tuple(sorted(c)) for c in combinations)
+    return list(set(tuple(sorted(c)) for c in combinations))
         
 
 if __name__ == '__main__':
