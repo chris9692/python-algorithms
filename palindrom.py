@@ -1,3 +1,4 @@
+
 import numpy as np
 
 def _palindrom(s, st, start, end):
@@ -33,4 +34,6 @@ def maxPalindromSubString(s):
                 _palindrom(s, states, i, j)
             
     print(np.max(states))
-    
+
+if __name__ == '__main__':
+    maxPalindromSubString('qeyhgerthejxxxaabcbaaxxxje')
