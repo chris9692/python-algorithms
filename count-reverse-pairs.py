@@ -48,7 +48,7 @@ def _merge(al, ar):
 def _getInvCount_MS(a):
     if len(a) <= 2:
         x = a[0]
-        a.sort
+        a.sort()
         return 1 if x != a[0] else 0, a
     
     m = len(a) // 2
