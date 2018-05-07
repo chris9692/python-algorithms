@@ -64,7 +64,10 @@ class Node(object):
         self.value = val
         self.left = None
         self.right = None
-        self.count = 1
+        if val is None:
+            self.count = 0
+        else:
+            self.count = 1
         
     def search(self, val):
         """
@@ -78,9 +81,8 @@ class Node(object):
         if val < self.value:
             return (self.count if self.left is None else 
                     (self.count + self.left.search(val)))
-        if val > self.value:
+        else:
             return 0 if self.right == None else self.right.search(val)
-        return self.count if self.value == val else 0
 
 
     def insert(self, val):
@@ -96,6 +98,7 @@ class Node(object):
                 else:
                     self.left = Node(val)
             else:
+                self.count += 1
                 if self.right is not None:
                     self.right.insert(val)
                 else:    
@@ -115,5 +118,5 @@ def getInvCount_BST(a):
     return count
 
 if __name__ == '__main__':
-    assert(getInvCount_BST([1, 20, 6, 4, 5]) == 5)
+    assert(getInvCount_BST([10, 20, 6, 4, 5]) == 8)
     
