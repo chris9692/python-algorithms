@@ -23,3 +23,13 @@ print('user_id session_id session_start session_end activity_count')
 for uid, ss in sessions.items():
     for sid, s in ss.items():
         print(uid, sid, s[0].isoformat(), s[1].isoformat(), s[2])
+
+from functools import reduce
+for uid, ss in sessions.items():
+    scount1 = reduce(lambda x, y: x + y, ss)
+    scount2 = reduce(lambda x, y: x + y, list(map(lambda x: 1, ss)))
+    scount3 = reduce(lambda x, y: x + y, list(map(lambda x: x[2], ss.values())))
+    print('user id: ', uid)
+    print('  session count: ', scount2)
+    print('  activity count: ', scount3)
+        
