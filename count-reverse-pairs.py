@@ -35,8 +35,8 @@ def merge(al, ar):
         
 def getInvCount_MS(a):
     """
-    This is the brute force method that takes O(n^2) time
-    and no extra space
+    This is the merge sort method that takes O(nlogn) time
+    and with side effects
     """
     count = 0
     
@@ -58,3 +58,62 @@ def getInvCount_MS(a):
 
 if __name__ == '__main__':
     print(getInvCount_MS([1, 20, 6, 4, 5]))
+
+class Node(object):
+    def __init__(self, val):
+        self.value = val
+        self.left = None
+        self.right = None
+        self.count = 1
+        
+    def search(self, val):
+        """
+        the assumption is that elements will be inserted
+        from left to right into the BST, therefore, the 
+        search is looking for any prior numbers that is 
+        larger than current
+        """
+        if self.value is None:
+            return 0
+        if val < self.value:
+            return (self.count if self.left is None else 
+                    (self.count + self.left.search(val)))
+        if val > self.value:
+            return 0 if self.right == None else self.right.search(val)
+        return self.count if self.value == val else 0
+
+
+    def insert(self, val):
+        if self.value is None:
+            self.value = val
+            self.count = 1
+        elif self.value == val:
+            self.count += 1
+        else:
+            if val < self.value: 
+                if self.left is not None:
+                    self.left.insert(val)
+                else:
+                    self.left = Node(val)
+            else:
+                if self.right is not None:
+                    self.right.insert(val)
+                else:    
+                    self.right = Node(val)
+    
+def getInvCount_BST(a):
+    """
+    This is the BST method that takes O(nlogn) time
+    and O(n) extra space
+    """
+    bst = Node(None)    
+    count = 0
+    for n in a:
+        count += bst.search(n)
+        print(n, count)
+        bst.insert(n)
+    return count
+
+if __name__ == '__main__':
+    assert(getInvCount_BST([1, 20, 6, 4, 5]) == 5)
+    
