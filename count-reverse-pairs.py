@@ -79,11 +79,18 @@ class Node(object):
     def search(self, val):
         if self.value is None:
             return 0
+        
+        count = 0
         if val < self.value:
-            return (self.count if self.left is None else 
-                    (self.count + self.left.search(val)))
+            # all data elements larger than self.value
+            count = self.count 
+            if self.left is not None:
+                count += self.left.search(val)
         else:
-            return 0 if self.right == None else self.right.search(val)
+            if self.right is not None:
+                count += self.right.search(val)
+        
+        return count
 
     def insert(self, val):
         if self.value is None:
