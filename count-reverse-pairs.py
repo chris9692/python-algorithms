@@ -23,7 +23,7 @@ def _merge(al, ar):
     j = 0
     temp = []
     while i < len(al) and j < len(ar):
-        if j < len(ar) and al[i] > ar[j]:
+        if al[i] > ar[j]:
             temp.append(ar[j])
             j += 1 
             if j == len(ar):
