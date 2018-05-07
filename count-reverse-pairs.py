@@ -21,29 +21,29 @@ def _merge(al, ar):
     count = 0
     i = 0
     j = 0
-    temp = []
+    merged = []
     while i < len(al) and j < len(ar):
         if al[i] > ar[j]:
-            temp.append(ar[j])
+            merged.append(ar[j])
             j += 1 
             if j == len(ar):
                 # the right array was all processed
                 # add anything remain in left
                 while i < len(al):
-                    temp.append(al[i])
+                    merged.append(al[i])
                     count += j 
                     i += 1
         else:
-            temp.append(al[i])
+            merged.append(al[i])
             count += j 
             i += 1
             if i == len(al): 
                 # the left array was all processed
                 # add anything remain in right
                 while j < len(ar):
-                    temp.append(ar[j])
+                    merged.append(ar[j])
                     j += 1 
-    return count, temp
+    return count, merged
         
 def _getInvCount_MS(a):
     if len(a) <= 2:
