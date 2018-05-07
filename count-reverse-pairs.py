@@ -17,47 +17,54 @@ def getInvCount_BF(a):
 if __name__ == '__main__':
     assert(getInvCount_BF([1, 20, 6, 4, 5]) == 5)
 
-def merge(al, ar):
+def _merge(al, ar):
     count = 0
     i = 0
     j = 0
-    a = []
-    while i < len(al) and j <= len(ar):
+    temp = []
+    while i < len(al) and j < len(ar):
         if j < len(ar) and al[i] > ar[j]:
-            a.append(ar[j])
+            temp.append(ar[j])
             j += 1 
+            if j == len(ar):
+                # the right array was all processed
+                # add anything remain in left
+                while i < len(al):
+                    temp.append(al[i])
+                    count += j 
+                    i += 1
         else:
-            a.append(al[i])
+            temp.append(al[i])
             count += j 
             i += 1
-    #print(count, a, al, ar)
-    return count, a
+            if i == len(al): 
+                # the left array was all processed
+                # add anything remain in right
+                while j < len(ar):
+                    temp.append(ar[j])
+                    j += 1 
+    return count, temp
         
-def getInvCount_MS(a):
-    """
-    This is the merge sort method that takes O(nlogn) time
-    and with side effects
-    """
-    count = 0
+def _getInvCount_MS(a):
+    if len(a) <= 2:
+        x = a[0]
+        a.sort
+        return 1 if x != a[0] else 0, a
     
-    if len(a) < 2:
-        return 0, a
-    
-    if len(a) == 2:
-        count = 1 if a[0] > a[1] else 0
-        a.sort()
-        return count, a
- 
     m = len(a) // 2
     
-    nl, al = getInvCount_MS(a[:m])
-    nr, ar = getInvCount_MS(a[m:])
-    nm, am = merge(al, ar)
+    nl, al = _getInvCount_MS(a[:m])
+    nr, ar = _getInvCount_MS(a[m:])
+    nm, am = _merge(al, ar)
     
     return nl + nr + nm, am
 
+def getInvCount_MS(a):
+    c, x = _getInvCount_MS(a)
+    return c
+
 if __name__ == '__main__':
-    print(getInvCount_MS([1, 20, 6, 4, 5]))
+    assert(getInvCount_MS([1, 20, 6, 4, 5]) == 5)
 
 class Node(object):
     def __init__(self, val):
@@ -70,12 +77,6 @@ class Node(object):
             self.count = 1
         
     def search(self, val):
-        """
-        the assumption is that elements will be inserted
-        from left to right into the BST, therefore, the 
-        search is looking for any prior numbers that is 
-        larger than current
-        """
         if self.value is None:
             return 0
         if val < self.value:
@@ -83,7 +84,6 @@ class Node(object):
                     (self.count + self.left.search(val)))
         else:
             return 0 if self.right == None else self.right.search(val)
-
 
     def insert(self, val):
         if self.value is None:
@@ -105,18 +105,12 @@ class Node(object):
                     self.right = Node(val)
     
 def getInvCount_BST(a):
-    """
-    This is the BST method that takes O(nlogn) time
-    and O(n) extra space
-    """
     bst = Node(None)    
     count = 0
     for n in a:
         count += bst.search(n)
-        print(n, count)
         bst.insert(n)
     return count
 
 if __name__ == '__main__':
-    assert(getInvCount_BST([10, 20, 6, 4, 5]) == 8)
-    
+    assert(getInvCount_BST([1, 10, 20, 6, 4, 5]) == 8)
