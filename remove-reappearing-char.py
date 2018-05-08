@@ -10,6 +10,7 @@ def removeDupChar0(s):
             result += s[i]
     return result
 
+import re
 def removeDupChar1(s):
     """
     deereererererereerer => der
