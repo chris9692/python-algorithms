@@ -5,8 +5,14 @@ def removeDupChar0(s):
     """
     asize = len(s)
     result = ''
+    index = [1] * asize
+    for i in range(asize-1, 0, -1):
+        for j in range(0, i):
+            if s[j] == s[i]:
+                index[i] = 0
+                break
     for i in range(asize):
-        if s[i] not in s[i+1:]:
+        if index[i] == 1:
             result += s[i]
     return result
 
