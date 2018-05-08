@@ -47,3 +47,6 @@ def removeDupChar(s):
 assert(removeDupChar0('deereererererereerer') == 'der')
 assert(removeDupChar0('deereererererereerer') == removeDupChar1('deereererererereerer'))
 assert(removeDupChar0('deereererererereerer') == removeDupChar('deereererererereerer'))
+assert(removeDupChar0('deereererererereerere') == 'der')
+assert(removeDupChar0('deereererererereerere') == removeDupChar1('deereererererereerere'))
+assert(removeDupChar0('deereererererereerere') == removeDupChar('deereererererereerere'))
