@@ -30,7 +30,7 @@ class minHeap(object):
         self.size = len(arr)
         
         # heapify, starting from the last non-leaf node
-        for r in range(self.size // 2 - 1, -1, -1):
+        for r in range((self.size - 1) // 2, -1, -1):
             self.heapify(r, self.size)
             
         # in each loop, take the smallest from heap[0]
