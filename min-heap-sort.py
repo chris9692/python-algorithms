@@ -1,3 +1,4 @@
+
 import numpy as np
 class minHeap(object):
     """
@@ -40,6 +41,8 @@ class minHeap(object):
         for i in range(self.size - 1, -1, -1):
             self.heap[0], self.heap[i] = self.heap[i], self.heap[0]
             self.heapify(0, i)
+        self.heap = self.heap[-1::-1]    
+            
         return self.heap
 
     def nlargest(self, n):
