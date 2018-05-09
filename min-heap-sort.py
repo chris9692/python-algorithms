@@ -1,3 +1,4 @@
+import numpy as np
 class minHeap(object):
     """
     """
@@ -8,19 +9,21 @@ class minHeap(object):
     # for a sub-tree of size n (not neccessarily the same as "size")
     # make sure any node has value less than its children
     
+
     def heapify(self, r, n):
-        smallest = r
         left = 2 * r + 1
         right = 2 * r + 2
  
-        if (left < n and self.heap[left] < self.heap[smallest]):
-            smallest = left
-        if (right < n and self.heap[right] < self.heap[smallest]):
-            smallest = right
+        rNext = r
+        if left < n and self.heap[left] < self.heap[r]:
+            rNext = left
+
+        if right < n and self.heap[right] < self.heap[r]:
+            rNext = right
  
-        if smallest != r:
-            self.heap[r], self.heap[smallest] = self.heap[smallest], self.heap[r] 
-            self.heapify(smallest, n)
+        if rNext != r:
+            self.heap[r], self.heap[rNext] = self.heap[rNext], self.heap[r] 
+            self.heapify(rNext, n)
     
     def heapSort(self, arr):
         self.heap = arr[:]
