@@ -14,16 +14,16 @@ class minHeap(object):
         left = 2 * r + 1
         right = 2 * r + 2
  
-        rNext = r
+        nextR = r
         if left < n and self.heap[left] < self.heap[r]:
-            rNext = left
+            nextR = left
 
         if right < n and self.heap[right] < self.heap[r]:
-            rNext = right
+            nextR = right
  
-        if rNext != r:
-            self.heap[r], self.heap[rNext] = self.heap[rNext], self.heap[r] 
-            self.heapify(rNext, n)
+        if nextR != r:
+            self.heap[r], self.heap[nextR] = self.heap[nextR], self.heap[r] 
+            self.heapify(nextR, n)
     
     def heapSort(self, arr):
         self.heap = arr[:]
