@@ -23,3 +23,10 @@ if __name__ == '__main__':
     assert(longestCSS("GeeksforGeeks", "GeeksQuiz") == 5)
     assert(longestCSS("abcdxyz", "xyzabcd") == 4)
     assert(longestCSS("zxabcdezy", "yzabcdezx") == 6)
+
+LCS(s1, s2, i, j):
+    if(i == -1 || j == -1)
+        return 0
+    if(s1[i] == s2[j])
+        return 1 + LCS(s1, s2, i-1, j-1)
+    return max(LCS(s1, s2, i-1, j), LCS(s1, s2, i, j-1))
